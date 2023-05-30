@@ -1,6 +1,7 @@
 import os
 import json
 import sys
+import time
 
 import torch
 import torch.nn as nn
@@ -12,6 +13,7 @@ from model import resnet34
 
 
 def main():
+    time1 = time.time()
     if torch.cuda.is_available():
         _device = "cuda:0"
     elif torch.backends.mps.is_available():
@@ -134,6 +136,8 @@ def main():
             torch.save(net.state_dict(), save_path)
 
     print('Finished Training')
+    time2 = time.time()
+    print(time2 - time1)
 
 
 if __name__ == '__main__':
