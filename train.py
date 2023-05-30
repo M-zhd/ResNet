@@ -13,6 +13,7 @@ from model import resnet34
 
 
 def main():
+    # 计算时间
     time1 = time.time()
     if torch.cuda.is_available():
         _device = "cuda:0"
