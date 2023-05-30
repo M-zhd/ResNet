@@ -12,7 +12,13 @@ from model import resnet34
 
 
 def main():
-    device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
+    if torch.cuda.is_available():
+        _device = "cuda:0"
+    elif torch.backends.mps.is_available():
+        _device = "mps"
+    else:
+        _device = "cpu"
+    device = torch.device(_device)
     print("using {} device.".format(device))
     # 这里的Normalize参数需要与官方保持一直，因为用到了官方的预训练权重
     data_transform = {
